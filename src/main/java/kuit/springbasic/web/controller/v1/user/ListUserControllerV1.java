@@ -29,7 +29,7 @@ public class ListUserControllerV1 implements ControllerV1 {
             modelAndView.getModel().put("users", userDao.findAll());
             return modelAndView;
         }
-        modelAndView = new ModelAndView("/v1/user/loginForm");
+        modelAndView = new ModelAndView("redirect:/v1/user/loginForm");
         return modelAndView;
     }
 

@@ -5,12 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kuit.springbasic.core.mvc.model.ModelAndView;
 import kuit.springbasic.core.mvc.view.View;
 import kuit.springbasic.web.util.UserSessionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ import java.util.Map;
 public class DispatcherServletV1 extends HttpServlet {
 
     private RequestMapping requestMapping;
+    private static final String REDIRECT_PREFIX = "redirect:";
 
     @Override
     public void init() {
@@ -35,11 +38,20 @@ public class DispatcherServletV1 extends HttpServlet {
         if (controller == null) return;
 
         Map<String, String> params = createParamMap(request);
-        ModelAndView modelAndView = controller.execute(params);
-        String viewName = modelAndView.getViewName(); // 논리 이름
+        ModelAndView modelAndView;
+        try {
+            modelAndView = controller.execute(params);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        View view = viewResolver(viewName); // 물리 이름 생성 후 View 객체 반환
-        view.render(modelAndView.getModel(), request, response);
+        String viewName = modelAndView.getViewName(); // 논리 이름
+        if (viewName == null) {
+            return;
+        }
+        boolean isRedirect = viewName.startsWith(REDIRECT_PREFIX);
+        View view = viewResolver(isRedirect, viewName); // 물리 이름 생성 후 View 객체 반환
+        view.render(isRedirect, modelAndView.getModel(), request, response);
     }
 
     private ControllerV1 getController(HttpServletRequest request, HttpServletResponse response) {
@@ -49,9 +61,13 @@ public class DispatcherServletV1 extends HttpServlet {
             return null;
         }
 
-        boolean isLoggedIn = UserSessionUtils.isLoggedIn(request.getSession());
-        log.info("isLoggedIn={}", isLoggedIn);
+        HttpSession session = request.getSession();
+        controller.setSession(session);
+
+        boolean isLoggedIn = UserSessionUtils.isLoggedIn(session);
         controller.setIsLoggedIn(isLoggedIn);
+        log.info("isLoggedIn={}", isLoggedIn);
+
         return controller;
     }
 
@@ -66,7 +82,10 @@ public class DispatcherServletV1 extends HttpServlet {
         return params;
     }
 
-    private View viewResolver(String viewName) {
+    private View viewResolver(boolean isRedirect, String viewName) {
+        if (isRedirect) {
+            return new View(viewName.substring(REDIRECT_PREFIX.length()));
+        }
         return new View("/WEB-INF/" + viewName + ".jsp");
     }
 

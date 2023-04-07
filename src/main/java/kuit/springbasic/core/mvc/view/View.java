@@ -16,18 +16,14 @@ public class View {
         this.viewPath = viewPath;
     }
 
-    public void render(HttpServletRequest request, HttpServletResponse response)
+    public void render(boolean isRedirect, Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPath);
-        requestDispatcher.forward(request, response);
-    }
-
-    public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+        if (isRedirect) {
+            response.sendRedirect(viewPath);
+            return;
+        }
         setModelToRequestAttribute(model, request);
-
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPath);
         requestDispatcher.forward(request, response);
     }

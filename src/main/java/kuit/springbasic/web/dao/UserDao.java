@@ -3,6 +3,7 @@ package kuit.springbasic.web.dao;
 import kuit.springbasic.core.jdbc.JdbcTemplate;
 import kuit.springbasic.domain.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserDao {
@@ -25,6 +26,16 @@ public class UserDao {
 
         return jdbcTemplate.query(sql, rs ->
                 new User(rs.getString("userId"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getString("email")));
+    }
+
+    public User findByUserId(String userId) throws SQLException {
+        String sql = "select userId, password, name, email from users where userId=?";
+        return jdbcTemplate.queryForObject(sql,
+                pstmt -> pstmt.setString(1, userId),
+                rs -> new User(rs.getString("userId"),
                         rs.getString("password"),
                         rs.getString("name"),
                         rs.getString("email")));

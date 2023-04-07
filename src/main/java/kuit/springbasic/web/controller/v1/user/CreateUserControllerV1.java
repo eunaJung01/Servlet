@@ -24,7 +24,7 @@ public class CreateUserControllerV1 implements ControllerV1 {
                 params.get("email"));
         userDao.insert(user);
 
-        ModelAndView modelAndView = new ModelAndView("/v1/user/list");
+        ModelAndView modelAndView = new ModelAndView("redirect:v1/user/list");
         return modelAndView;
     }
 
