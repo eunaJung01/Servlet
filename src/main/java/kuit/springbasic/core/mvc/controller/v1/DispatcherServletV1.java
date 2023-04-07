@@ -37,20 +37,12 @@ public class DispatcherServletV1 extends HttpServlet {
         ControllerV1 controller = getController(request, response);
         if (controller == null) return;
 
-        Map<String, String> params = createParamMap(request);
-        ModelAndView modelAndView;
-        try {
-            modelAndView = controller.execute(params);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        ModelAndView modelAndView = getModelAndView(request, controller);
+        String viewName = modelAndView.getViewName();
+        if (viewName == null) return;
 
-        String viewName = modelAndView.getViewName(); // 논리 이름
-        if (viewName == null) {
-            return;
-        }
         boolean isRedirect = viewName.startsWith(REDIRECT_PREFIX);
-        View view = viewResolver(isRedirect, viewName); // 물리 이름 생성 후 View 객체 반환
+        View view = viewResolver(isRedirect, viewName);
         view.render(isRedirect, modelAndView.getModel(), request, response);
     }
 
@@ -71,10 +63,17 @@ public class DispatcherServletV1 extends HttpServlet {
         return controller;
     }
 
-    /**
-     * @param request
-     * @return HttpServletRequest 파라미터들을 저장한 Map
-     */
+    private ModelAndView getModelAndView(HttpServletRequest request, ControllerV1 controller) {
+        Map<String, String> params = createParamMap(request);
+        ModelAndView modelAndView;
+        try {
+            modelAndView = controller.execute(params);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return modelAndView;
+    }
+
     private Map<String, String> createParamMap(HttpServletRequest request) {
         Map<String, String> params = new HashMap<>();
         request.getParameterNames().asIterator()
