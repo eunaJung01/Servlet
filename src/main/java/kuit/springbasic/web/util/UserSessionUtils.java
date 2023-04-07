@@ -1,7 +1,7 @@
 package kuit.springbasic.web.util;
 
 import jakarta.servlet.http.HttpSession;
-import kuit.springbasic.domain.User;
+import kuit.springbasic.web.domain.User;
 
 public class UserSessionUtils {
 

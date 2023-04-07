@@ -1,4 +1,4 @@
-package kuit.springbasic.domain;
+package kuit.springbasic.web.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

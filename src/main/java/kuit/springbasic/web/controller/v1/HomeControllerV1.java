@@ -3,7 +3,7 @@ package kuit.springbasic.web.controller.v1;
 import kuit.springbasic.core.mvc.controller.v1.ControllerV1;
 import kuit.springbasic.core.mvc.model.ModelAndView;
 import kuit.springbasic.web.dao.QuestionDao;
-import kuit.springbasic.domain.Question;
+import kuit.springbasic.web.domain.Question;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;

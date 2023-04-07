@@ -1,7 +1,7 @@
 package kuit.springbasic.web.dao;
 
 import kuit.springbasic.core.jdbc.JdbcTemplate;
-import kuit.springbasic.domain.Question;
+import kuit.springbasic.web.domain.Question;
 
 import java.util.List;
 

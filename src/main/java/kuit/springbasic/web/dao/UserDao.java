@@ -1,7 +1,7 @@
 package kuit.springbasic.web.dao;
 
 import kuit.springbasic.core.jdbc.JdbcTemplate;
-import kuit.springbasic.domain.User;
+import kuit.springbasic.web.domain.User;
 
 import java.sql.SQLException;
 import java.util.List;
