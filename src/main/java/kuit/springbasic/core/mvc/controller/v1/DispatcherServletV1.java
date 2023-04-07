@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kuit.springbasic.core.mvc.model.ModelAndView;
 import kuit.springbasic.core.mvc.view.View;
+import kuit.springbasic.web.util.UserSessionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -30,20 +31,28 @@ public class DispatcherServletV1 extends HttpServlet {
 
         log.info("DispatcherServlet");
 
+        ControllerV1 controller = getController(request, response);
+        if (controller == null) return;
+
+        Map<String, String> params = createParamMap(request);
+        ModelAndView modelAndView = controller.execute(params);
+        String viewName = modelAndView.getViewName(); // 논리 이름
+
+        View view = viewResolver(viewName); // 물리 이름 생성 후 View 객체 반환
+        view.render(modelAndView.getModel(), request, response);
+    }
+
+    private ControllerV1 getController(HttpServletRequest request, HttpServletResponse response) {
         ControllerV1 controller = requestMapping.getController(request);
         if (controller == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return;
+            return null;
         }
 
-        Map<String, String> params = createParamMap(request);
-
-        ModelAndView modelAndView = controller.execute(params);
-
-        String viewName = modelAndView.getViewName(); // 논리 이름
-        View view = viewResolver(viewName); // 물리 이름 생성 후 View 객체 반환
-
-        view.render(modelAndView.getModel(), request, response);
+        boolean isLoggedIn = UserSessionUtils.isLoggedIn(request.getSession());
+        log.info("isLoggedIn={}", isLoggedIn);
+        controller.setIsLoggedIn(isLoggedIn);
+        return controller;
     }
 
     /**

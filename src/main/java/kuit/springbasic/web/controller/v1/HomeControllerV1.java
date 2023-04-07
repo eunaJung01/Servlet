@@ -18,12 +18,11 @@ public class HomeControllerV1 implements ControllerV1 {
     public ModelAndView execute(Map<String, String> params) {
         log.info("HomeControllerV1");
 
-        List<Question> questions = questionDAO.findAll();
+        ModelAndView modelAndView = new ModelAndView("/v1/homeV1");
 
-        ModelAndView modelAndView = new ModelAndView("home/homeV1");
+        List<Question> questions = questionDAO.findAll();
         modelAndView.getModel().put("questions", questions);
 
-        log.info("modelAndView.getViewName={}", modelAndView.getViewName());
         return modelAndView;
     }
 

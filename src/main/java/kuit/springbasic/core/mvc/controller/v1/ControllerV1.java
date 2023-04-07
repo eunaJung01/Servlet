@@ -6,6 +6,9 @@ import java.util.Map;
 
 public interface ControllerV1 {
 
+    default void setIsLoggedIn(boolean isLoggedIn) {
+    }
+
     ModelAndView execute(Map<String, String> params);
 
 }
