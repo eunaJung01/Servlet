@@ -30,11 +30,7 @@ public class User {
     }
 
     public boolean isSameUser(User loggedInUser) {
-        return isSameUser(loggedInUser.userId, loggedInUser.password);
-    }
-
-    public boolean isSameUser(String userId, String password) {
-        return hasSameUserId(userId) && hasSamePassword(password);
+        return hasSameUserId(loggedInUser.userId) && hasSamePassword(loggedInUser.password);
     }
 
     public boolean hasSameUserId(String userId) {
