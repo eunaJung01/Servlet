@@ -1,4 +1,4 @@
-package kuit.springbasic.web.util;
+package kuit.springbasic.core.mvc.util;
 
 import jakarta.servlet.http.HttpSession;
 import kuit.springbasic.web.domain.User;
