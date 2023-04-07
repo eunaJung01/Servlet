@@ -3,9 +3,9 @@
 
 <!doctype html>
 <html lang="ko">
-<%@ include file="/include/header.jspf" %>
+<%@ include file="/include/v1/headerV1.jspf" %>
 <body>
-<%@ include file="/include/navigation.jspf" %>
+<%@ include file="/include/v1/navigationV1.jspf" %>
 <div class="container">
     <main class="form-signin">
         <div>

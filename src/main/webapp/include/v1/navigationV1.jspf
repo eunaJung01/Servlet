@@ -37,21 +37,22 @@
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/WEB-INF/home.jsp" class="nav-link px-2 link-secondary">Q&A</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-            <li><a href="/user/list" class="nav-link px-2 link-dark">User List</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+            <li><a href="/v1" class="nav-link px-2 link-secondary">Q&A</a></li>
+            <li><a href="/v1" class="nav-link px-2 link-dark">FAQs</a></li>
+            <li><a href="/v1/user/list" class="nav-link px-2 link-dark">User List</a></li>
+            <li><a href="/v1" class="nav-link px-2 link-dark">About</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <a href="/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
-                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary">개인정보수정</a>
+                    <a href="/v1/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
+                    <a href="/v1/user/updateForm?userId=${sessionScope.user.userId}" role="button"
+                       class="btn btn-primary">개인정보수정</a>
                 </c:when>
                 <c:otherwise>
-                    <a href="/user/loginForm" type="button" class="btn btn-outline-primary me-2">Log-In</a>
-                    <a href="/user/form" type="button" class="btn btn-primary">Sign-up</a>
+                    <a href="/v1/user/loginForm" type="button" class="btn btn-outline-primary me-2">Log-In</a>
+                    <a href="/v1/user/form" type="button" class="btn btn-primary">Sign-up</a>
                 </c:otherwise>
             </c:choose>
         </div>

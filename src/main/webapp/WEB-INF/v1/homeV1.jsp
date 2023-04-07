@@ -3,9 +3,9 @@
 
 <!doctype html>
 <html lang="ko">
-<%@ include file="/include/header.jspf" %>
+<%@ include file="/include/v1/headerV1.jspf" %>
 <body>
-<%@ include file="/include/navigation.jspf" %>
+<%@ include file="/include/v1/navigationV1.jspf" %>
 
 <div class="container" id="main">
     <h2>Q&A</h2>
@@ -17,13 +17,13 @@
                     <div class="wrap">
                         <div class="main">
                             <strong class="subject">
-                                <a href="/qna/show?questionId=${question.questionId}">${question.title}</a>
+                                <a href="/v1/qna/show?questionId=${question.questionId}">${question.title}</a>
                             </strong>
 
                             <div class="auth-info">
                                 <i class="icon-add-comment"></i>
                                 <span class="time">${question.createdDate}</span>
-                                <a href="/user/profile.html" class="author">${question.writer}</a>
+                                <a href="/v1/user/profile.html" class="author">${question.writer}</a>
                             </div>
 
                             <div class="reply" title="댓글">
@@ -64,7 +64,7 @@
             </div>
 
             <div class="col-md-2 qna-write">
-                <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
+                <a href="/v1/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
             </div>
         </div>
     </div>

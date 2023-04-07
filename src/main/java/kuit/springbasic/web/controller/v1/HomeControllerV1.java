@@ -20,7 +20,7 @@ public class HomeControllerV1 implements ControllerV1 {
 
         List<Question> questions = questionDAO.findAll();
 
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("home/homeV1");
         modelAndView.getModel().put("questions", questions);
 
         log.info("modelAndView.getViewName={}", modelAndView.getViewName());

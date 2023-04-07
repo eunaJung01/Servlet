@@ -5,10 +5,12 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-    <%@ include file="/include/header.jspf" %>
+    <%--    <%@ include file="/include/header.jspf" %>--%>
+    <%@ include file="/include/v1/headerV1.jspf" %>
 </head>
 <body>
-<%@ include file="/include/navigation.jspf" %>
+<%--<%@ include file="/include/navigation.jspf" %>--%>
+<%@ include file="/include/v1/navigationV1.jspf" %>
 
 <div class="container" id="main">
     <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
