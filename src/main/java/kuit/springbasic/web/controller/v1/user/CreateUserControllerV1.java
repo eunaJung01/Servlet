@@ -17,7 +17,11 @@ public class CreateUserControllerV1 implements ControllerV1 {
     public ModelAndView execute(Map<String, String> params) {
         log.info("CreateUserControllerV1");
 
-        User user = new User(params.get("userId"), params.get("password"), params.get("name"), params.get("email"));
+        User user = new User(
+                params.get("userId"),
+                params.get("password"),
+                params.get("name"),
+                params.get("email"));
         userDao.insert(user);
 
         ModelAndView modelAndView = new ModelAndView("/v1/user/list");
