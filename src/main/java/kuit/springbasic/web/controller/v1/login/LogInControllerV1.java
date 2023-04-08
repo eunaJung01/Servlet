@@ -32,7 +32,7 @@ public class LogInControllerV1 implements ControllerV1 {
         User loggedInUser = new User(userId, password);
         User user = userDao.findByUserId(userId);
 
-        if (user != null && user.isSameUser(loggedInUser)) {
+        if (user != null && user.equals(loggedInUser)) {
             session.setAttribute("user", user);
             return new ModelAndView("redirect:/v1");
         }
