@@ -13,7 +13,7 @@ import java.util.Map;
 @Slf4j
 public class LogInControllerV1 implements ControllerV1 {
 
-    HttpSession session;
+    private HttpSession session;
 
     private UserDao userDao = new UserDao();
 
@@ -28,15 +28,13 @@ public class LogInControllerV1 implements ControllerV1 {
 
         String userId = params.get("userId");
         String password = params.get("password");
-        User loggedInUser = new User(userId, password);
 
+        User loggedInUser = new User(userId, password);
         User user = userDao.findByUserId(userId);
 
-        ModelAndView modelAndView;
         if (user != null && user.isSameUser(loggedInUser)) {
             session.setAttribute("user", user);
-            modelAndView = new ModelAndView("redirect:/v1");
-            return modelAndView;
+            return new ModelAndView("redirect:/v1");
         }
         return new ModelAndView("redirect:/v1/user/loginFailed");
     }

@@ -21,9 +21,7 @@ public class ForwardControllerV1 implements ControllerV1 {
     @Override
     public ModelAndView execute(Map<String, String> params) {
         log.info("ForwardControllerV1");
-
-        ModelAndView modelAndView = new ModelAndView(forwardUrl);
-        return modelAndView;
+        return new ModelAndView(forwardUrl);
     }
 
 }
