@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @EqualsAndHashCode
 @Getter
@@ -27,6 +28,14 @@ public class Question {
         this.title = title;
         this.contents = contents;
         this.createdDate = createdDate;
+        this.countOfAnswer = countOfAnswer;
+    }
+
+    public Question(String writer, String title, String contents, int countOfAnswer) {
+        this.writer = writer;
+        this.title = title;
+        this.contents = contents;
+        this.createdDate = Date.valueOf(LocalDate.now());
         this.countOfAnswer = countOfAnswer;
     }
 

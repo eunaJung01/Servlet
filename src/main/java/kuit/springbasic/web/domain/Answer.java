@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @ToString
@@ -27,6 +28,13 @@ public class Answer {
         this.writer = writer;
         this.contents = contents;
         this.createdDate = createdDate;
+    }
+
+    public Answer(int questionId, String writer, String contents) {
+        this.questionId = questionId;
+        this.writer = writer;
+        this.contents = contents;
+        this.createdDate = Date.valueOf(LocalDate.now());
     }
 
 }
