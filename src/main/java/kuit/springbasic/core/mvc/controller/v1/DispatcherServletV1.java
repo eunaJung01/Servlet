@@ -20,12 +20,12 @@ import java.util.Map;
 @WebServlet(name = "dispatcher", urlPatterns = "/v1/*", loadOnStartup = 1)
 public class DispatcherServletV1 extends HttpServlet {
 
-    private RequestMapping requestMapping;
+    private RequestMappingV1 requestMapping;
     private static final String REDIRECT_PREFIX = "redirect:";
 
     @Override
     public void init() {
-        requestMapping = new RequestMapping();
+        requestMapping = new RequestMappingV1();
     }
 
     @Override

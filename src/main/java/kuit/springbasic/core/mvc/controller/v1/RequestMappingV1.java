@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class RequestMapping {
+public class RequestMappingV1 {
 
     private final Map<String, ControllerV1> controllers = new HashMap<>();
 
-    public RequestMapping() {
+    public RequestMappingV1() {
         initControllers();
     }
 
