@@ -8,7 +8,7 @@ import kuit.springbasic.web.controller.v1.login.LogOutControllerV1;
 import kuit.springbasic.web.controller.v1.qna.QnAFormControllerV1;
 import kuit.springbasic.web.controller.v1.qna.ShowQnAControllerV1;
 import kuit.springbasic.web.controller.v1.user.CreateUserControllerV1;
-import kuit.springbasic.web.controller.v1.user.ListUserControllerV1;
+import kuit.springbasic.web.controller.v1.user.UserListControllerV1;
 import kuit.springbasic.web.controller.v1.user.UpdateUserControllerV1;
 import kuit.springbasic.web.controller.v1.user.UpdateUserFormControllerV1;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +32,6 @@ public class RequestMappingV1 {
         controllers.put("/v1/user/loginForm", new ForwardControllerV1("/v1/user/login"));
         controllers.put("/v1/user/loginFailed", new ForwardControllerV1("/v1/user/loginFailed"));
 
-        controllers.put("/v1/user/list", new ListUserControllerV1());
-
         controllers.put("/v1/user/login", new LogInControllerV1());
         controllers.put("/v1/user/logout", new LogOutControllerV1());
 
@@ -42,6 +40,7 @@ public class RequestMappingV1 {
         controllers.put("/v1/user/updateForm", new UpdateUserFormControllerV1());
         controllers.put("/v1/user/update", new UpdateUserControllerV1());
 
+        controllers.put("/v1/user/list", new UserListControllerV1());
 
         controllers.put("/v1/qna/form", new QnAFormControllerV1());
         controllers.put("/v1/qna/show", new ShowQnAControllerV1());

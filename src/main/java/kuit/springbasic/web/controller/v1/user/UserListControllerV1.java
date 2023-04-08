@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Map;
 
 @Slf4j
-public class ListUserControllerV1 implements ControllerV1 {
+public class UserListControllerV1 implements ControllerV1 {
 
     private boolean isLoggedIn = false;
 
