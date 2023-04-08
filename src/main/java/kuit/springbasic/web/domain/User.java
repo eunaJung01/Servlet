@@ -29,6 +29,12 @@ public class User {
         this.password = password;
     }
 
+    public void update(User updateUser) {
+        this.password = updateUser.password;
+        this.name = updateUser.name;
+        this.email = updateUser.email;
+    }
+
     public boolean isSameUser(User loggedInUser) {
         return hasSameUserId(loggedInUser.userId) && hasSamePassword(loggedInUser.password);
     }

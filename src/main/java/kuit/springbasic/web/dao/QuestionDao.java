@@ -28,6 +28,11 @@ public class QuestionDao {
         jdbcTemplate.update(sql, question.getTitle(), question.getContents(), question.getQuestionId());
     }
 
+    public void delete(int id) {
+        String sql = "delete from questions where questionId=?";
+        jdbcTemplate.update(sql, pstmt -> pstmt.setObject(1, id));
+    }
+
     public List<Question> findAll() {
         String sql = "select * from questions order by questionId";
         return jdbcTemplate.query(sql, rs ->

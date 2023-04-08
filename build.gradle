@@ -22,6 +22,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation("org.apache.commons:commons-dbcp2:2.6.0")
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
     // JSP 추가 시작
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'

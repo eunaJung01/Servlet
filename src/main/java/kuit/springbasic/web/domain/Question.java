@@ -6,8 +6,8 @@ import lombok.Getter;
 import java.sql.Date;
 import java.time.LocalDate;
 
-@EqualsAndHashCode
 @Getter
+@EqualsAndHashCode(exclude = {"questionId"})
 public class Question {
 
     private int questionId;
