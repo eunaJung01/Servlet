@@ -11,7 +11,7 @@ import java.util.Map;
 @Slf4j
 public class CreateUserControllerV1 implements ControllerV1 {
 
-    private UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDao();
 
     @Override
     public ModelAndView execute(Map<String, String> params) {

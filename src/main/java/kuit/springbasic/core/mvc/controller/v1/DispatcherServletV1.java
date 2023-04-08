@@ -31,7 +31,6 @@ public class DispatcherServletV1 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         log.info("DispatcherServlet");
 
         ControllerV1 controller = getController(request, response);

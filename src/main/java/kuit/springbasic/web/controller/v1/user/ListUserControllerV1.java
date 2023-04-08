@@ -12,7 +12,7 @@ public class ListUserControllerV1 implements ControllerV1 {
 
     private boolean isLoggedIn = false;
 
-    private UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDao();
 
     @Override
     public void setIsLoggedIn(boolean isLoggedIn) {

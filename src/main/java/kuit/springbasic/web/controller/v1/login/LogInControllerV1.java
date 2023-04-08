@@ -15,7 +15,7 @@ public class LogInControllerV1 implements ControllerV1 {
 
     private HttpSession session;
 
-    private UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDao();
 
     @Override
     public void setSession(HttpSession session) {
