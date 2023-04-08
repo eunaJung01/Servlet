@@ -7,6 +7,8 @@ import kuit.springbasic.web.controller.v1.login.LogInControllerV1;
 import kuit.springbasic.web.controller.v1.login.LogOutControllerV1;
 import kuit.springbasic.web.controller.v1.user.CreateUserControllerV1;
 import kuit.springbasic.web.controller.v1.user.ListUserControllerV1;
+import kuit.springbasic.web.controller.v1.user.UpdateUserControllerV1;
+import kuit.springbasic.web.controller.v1.user.UpdateUserFormControllerV1;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -34,6 +36,9 @@ public class RequestMappingV1 {
         controllers.put("/v1/user/logout", new LogOutControllerV1());
 
         controllers.put("/v1/user/signup", new CreateUserControllerV1());
+
+        controllers.put("/v1/user/updateForm", new UpdateUserFormControllerV1());
+        controllers.put("/v1/user/update", new UpdateUserControllerV1());
     }
 
     public ControllerV1 getController(HttpServletRequest request) {

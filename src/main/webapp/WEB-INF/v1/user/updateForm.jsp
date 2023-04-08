@@ -8,32 +8,37 @@
 <%@ include file="/include/v1/navigationV1.jspf" %>
 
 <div class="container" id="main">
-
     <main class="form-signin">
-        <form name="update" method="post" action="/user/update">
+
+        <form name="update" method="post" action="/v1/user/update">
             <div class="form-floating">
                 <input type="text" class="form-control" value="${user.userId}" id="userId" name="userId"
                        placeholder="Id" readonly>
                 <label for="userId">User Id</label>
             </div>
+
             <div class="form-floating">
                 <input type="password" class="form-control" value="${user.password}" id="password" name="password"
                        placeholder="Password">
                 <label for="password">Password</label>
             </div>
+
             <div class="form-floating">
                 <input type="text" class="form-control" value="${user.name}" id="name" name="name" placeholder="name">
                 <label for="name">Name</label>
             </div>
+
             <div class="form-floating">
                 <input type="email" class="form-control" value="${user.email}" id="email" name="email"
                        placeholder="name@example.com">
                 <label for="email">Email address</label>
             </div>
+
             <div style="height:10px;">
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">개인 정보 수정</button>
         </form>
+
     </main>
 </div>
 
