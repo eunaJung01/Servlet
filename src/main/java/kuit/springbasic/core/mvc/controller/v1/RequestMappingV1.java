@@ -8,6 +8,8 @@ import kuit.springbasic.web.controller.v1.login.LogOutControllerV1;
 import kuit.springbasic.web.controller.v1.qna.question.AddQuestionControllerV1;
 import kuit.springbasic.web.controller.v1.qna.QnAFormControllerV1;
 import kuit.springbasic.web.controller.v1.qna.ShowQnAControllerV1;
+import kuit.springbasic.web.controller.v1.qna.question.UpdateQuestionControllerV1;
+import kuit.springbasic.web.controller.v1.qna.question.UpdateQuestionFormControllerV1;
 import kuit.springbasic.web.controller.v1.user.CreateUserControllerV1;
 import kuit.springbasic.web.controller.v1.user.UserListControllerV1;
 import kuit.springbasic.web.controller.v1.user.UpdateUserControllerV1;
@@ -47,6 +49,9 @@ public class RequestMappingV1 {
         controllers.put("/v1/qna/show", new ShowQnAControllerV1());
 
         controllers.put("/v1/qna/create", new AddQuestionControllerV1());
+
+        controllers.put("/v1/qna/updateForm", new UpdateQuestionFormControllerV1());
+        controllers.put("/v1/qna/update", new UpdateQuestionControllerV1());
     }
 
     public ControllerV1 getController(HttpServletRequest request) {

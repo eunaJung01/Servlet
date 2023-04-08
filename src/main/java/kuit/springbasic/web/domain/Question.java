@@ -39,4 +39,13 @@ public class Question {
         this.countOfAnswer = countOfAnswer;
     }
 
+    public void updateTitleAndContents(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
+    }
+
+    public boolean isSameUser(User user) {
+        return writer.equals(user.getUserId());
+    }
+
 }

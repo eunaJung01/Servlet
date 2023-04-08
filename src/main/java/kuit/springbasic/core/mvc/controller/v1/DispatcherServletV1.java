@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import kuit.springbasic.core.mvc.model.ModelAndView;
 import kuit.springbasic.core.mvc.view.View;
 import kuit.springbasic.core.mvc.util.UserSessionUtils;
+import kuit.springbasic.web.domain.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class DispatcherServletV1 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.info("DispatcherServlet");
+        log.info("--- DispatcherServlet ---");
 
         ControllerV1 controller = getController(request, response);
         if (controller == null) return;
@@ -51,7 +52,11 @@ public class DispatcherServletV1 extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
+        setControllerFields(request, controller);
+        return controller;
+    }
 
+    private static void setControllerFields(HttpServletRequest request, ControllerV1 controller) {
         HttpSession session = request.getSession();
         controller.setSession(session);
 
@@ -59,7 +64,10 @@ public class DispatcherServletV1 extends HttpServlet {
         controller.setIsLoggedIn(isLoggedIn);
         log.info("isLoggedIn={}", isLoggedIn);
 
-        return controller;
+        if (isLoggedIn) {
+            User userFromSession = UserSessionUtils.getUserFromSession(session);
+            controller.setUserFromSession(userFromSession);
+        }
     }
 
     private ModelAndView getModelAndView(HttpServletRequest request, ControllerV1 controller) {

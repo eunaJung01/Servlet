@@ -23,6 +23,11 @@ public class QuestionDao {
         return findByQuestionId(keyHolder.getId());
     }
 
+    public void update(Question question) {
+        String sql = "update questions set title = ?, contents = ? where questionId = ?";
+        jdbcTemplate.update(sql, question.getTitle(), question.getContents(), question.getQuestionId());
+    }
+
     public List<Question> findAll() {
         String sql = "select * from questions order by questionId";
         return jdbcTemplate.query(sql, rs ->

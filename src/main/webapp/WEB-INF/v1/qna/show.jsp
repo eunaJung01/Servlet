@@ -11,8 +11,10 @@
     <header class="qna-header">
         <h2 class="qna-title">${question.title}</h2>
     </header>
+
     <div class="content-main">
         <article class="article">
+
             <div class="article-header">
                 <div class="article-header-thumb">
                     <img src="/img/picture.jpeg" class="article-author-thumb" alt="">
@@ -25,20 +27,21 @@
                     </a>
                 </div>
             </div>
+
             <div class="article-doc">
                 ${question.contents}
             </div>
+
             <div class="article-util">
                 <ul class="article-util-list">
-
                     <c:if test="${not empty sessionScope.user}">
                         <li>
                             <a class="link-modify-article"
-                               href="/qna/updateForm?questionId=${question.questionId}">수정</a>
+                               href="/v1/qna/updateForm?questionId=${question.questionId}">수정</a>
                         </li>
                     </c:if>
                     <li>
-                        <a class="link-modify-article" href="/qna/delete?questionId=${question.questionId}">삭제</a>
+                        <a class="link-modify-article" href="/v1/qna/delete?questionId=${question.questionId}">삭제</a>
                     </li>
                     <li>
                         <a class="link-modify-article" href="/">목록</a>
@@ -47,12 +50,11 @@
             </div>
         </article>
 
-
         <div class="qna-comment">
             <div class="qna-comment-kuit">
                 <p class="qna-comment-count"><strong>${question.countOfAnswer}</strong>개의 의견</p>
-
                 <div class="qna-comment-kuit-articles">
+
                     <c:forEach items="${answers}" var="each">
                         <article class="article">
                             <div class="article-header">
@@ -66,9 +68,11 @@
                                                                                      value="${each.createdDate}"/></div>
                                 </div>
                             </div>
+
                             <div class="article-doc comment-doc">
                                 <p>${each.contents}</p>
                             </div>
+
                             <div class="article-util">
                                 <ul class="article-util-list">
                                     <li>
@@ -85,8 +89,8 @@
                             </div>
                         </article>
                     </c:forEach>
-                    <div class="answerWrite">
 
+                    <div class="answerWrite">
                         <form class="submit-write">
                             <input type="hidden" name="questionId" value="${question.questionId}">
                             <div class="form-group col-lg-4" style="padding-top:10px;">
@@ -99,7 +103,6 @@
                             <div class="clearfix"/>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -119,9 +122,11 @@
                 <div class="article-header-time">{1}</div>
             </div>
         </div>
+
         <div class="article-doc comment-doc">
             {2}
         </div>
+
         <div class="article-util">
             <ul class="article-util-list">
                 <li>
