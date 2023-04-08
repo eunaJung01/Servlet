@@ -23,7 +23,7 @@ public class CreateUserControllerV1 implements ControllerV1 {
                 params.get("email"));
         userDao.insert(user);
 
-        return new ModelAndView("redirect:v1/user/list");
+        return new ModelAndView("redirect:/v1/user/list");
     }
 
 }
