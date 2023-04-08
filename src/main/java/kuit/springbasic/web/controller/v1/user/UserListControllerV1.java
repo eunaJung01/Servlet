@@ -21,7 +21,7 @@ public class UserListControllerV1 implements ControllerV1 {
 
     @Override
     public ModelAndView execute(Map<String, String> params) {
-        log.info("ListUserControllerV1");
+        log.info("UserListControllerV1");
 
         if (isLoggedIn) {
             ModelAndView modelAndView = new ModelAndView("/v1/user/list");

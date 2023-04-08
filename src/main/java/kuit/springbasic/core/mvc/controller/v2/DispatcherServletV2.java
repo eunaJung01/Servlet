@@ -1,4 +1,4 @@
-package kuit.springbasic.core.mvc.controller.v1;
+package kuit.springbasic.core.mvc.controller.v2;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -6,10 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import kuit.springbasic.core.mvc.model.ModelAndView;
+import kuit.springbasic.core.mvc.util.UserSessionUtils;
 import kuit.springbasic.core.mvc.view.JsonView;
 import kuit.springbasic.core.mvc.view.JspView;
-import kuit.springbasic.core.mvc.util.UserSessionUtils;
 import kuit.springbasic.core.mvc.view.View;
 import kuit.springbasic.web.domain.User;
 import lombok.extern.slf4j.Slf4j;
@@ -20,37 +19,48 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@WebServlet(name = "dispatcherV1", urlPatterns = "/v1/*", loadOnStartup = 1)
-public class DispatcherServletV1 extends HttpServlet {
+@WebServlet(name = "dispatcherV2", urlPatterns = "/v2/*", loadOnStartup = 1)
+public class DispatcherServletV2 extends HttpServlet {
 
     private static final String REDIRECT_PREFIX = "redirect:";
     private static final String JSON_VIEW_PREFIX = "jsonView";
 
-    private RequestMappingV1 requestMapping;
+    private RequestMappingV2 requestMapping;
 
     @Override
     public void init() {
-        requestMapping = new RequestMappingV1();
+        requestMapping = new RequestMappingV2();
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.info("--- DispatcherServletV1 ---");
+        log.info("--- DispatcherServletV2 ---");
 
-        ControllerV1 controller = getController(request, response);
+        ControllerV2 controller = getController(request, response);
         if (controller == null) return;
 
-        ModelAndView modelAndView = getModelAndView(request, controller);
-        String viewName = modelAndView.getViewName();
+        Map<String, Object> model = new HashMap<>();
+        String viewName = getViewName(request, controller, model);
         if (viewName == null) return;
 
         View view = getView(viewName);
-        view.render(request, response, modelAndView.getModel());
+        view.render(request, response, model);
     }
 
-    private ControllerV1 getController(HttpServletRequest request, HttpServletResponse response) {
-        ControllerV1 controller = requestMapping.getController(request);
+    private String getViewName(HttpServletRequest request, ControllerV2 controller, Map<String, Object> model) {
+        Map<String, String> params = createParamMap(request);
+        String viewName;
+        try {
+            viewName = controller.execute(params, model);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return viewName;
+    }
+
+    private ControllerV2 getController(HttpServletRequest request, HttpServletResponse response) {
+        ControllerV2 controller = requestMapping.getController(request);
         if (controller == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
@@ -59,7 +69,7 @@ public class DispatcherServletV1 extends HttpServlet {
         return controller;
     }
 
-    private static void setControllerFields(HttpServletRequest request, ControllerV1 controller) {
+    private static void setControllerFields(HttpServletRequest request, ControllerV2 controller) {
         HttpSession session = request.getSession();
         controller.setSession(session);
 
@@ -71,17 +81,6 @@ public class DispatcherServletV1 extends HttpServlet {
             User userFromSession = UserSessionUtils.getUserFromSession(session);
             controller.setUserFromSession(userFromSession);
         }
-    }
-
-    private ModelAndView getModelAndView(HttpServletRequest request, ControllerV1 controller) {
-        Map<String, String> params = createParamMap(request);
-        ModelAndView modelAndView;
-        try {
-            modelAndView = controller.execute(params);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return modelAndView;
     }
 
     private Map<String, String> createParamMap(HttpServletRequest request) {

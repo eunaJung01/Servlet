@@ -19,7 +19,7 @@ public class QnAFormControllerV1 implements ControllerV1 {
 
     @Override
     public ModelAndView execute(Map<String, String> params) throws SQLException {
-        log.info("ShowQnAController");
+        log.info("QnAFormControllerV1");
 
         if (isLoggedIn) {
             return new ModelAndView("/v1/qna/form");
