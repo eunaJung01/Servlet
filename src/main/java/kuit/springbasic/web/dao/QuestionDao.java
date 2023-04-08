@@ -51,4 +51,13 @@ public class QuestionDao {
                         rs.getInt("countOfAnswer")));
     }
 
+    public void updateCountOfAnswer(Question question) {
+        String sql = "update questions set countOfAnswer=? where questionId=?";
+        jdbcTemplate.update(sql,
+                pstmt -> {
+                    pstmt.setObject(1, question.getCountOfAnswer());
+                    pstmt.setObject(2, question.getQuestionId());
+                });
+    }
+
 }

@@ -44,6 +44,10 @@ public class Question {
         this.contents = contents;
     }
 
+    public void increaseCountOfAnswer() {
+        countOfAnswer += 1;
+    }
+
     public boolean isSameUser(User user) {
         return writer.equals(user.getUserId());
     }

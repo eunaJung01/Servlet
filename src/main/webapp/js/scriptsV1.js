@@ -6,7 +6,7 @@ function addAnswer(e) {
 
     $.ajax({
         type: 'post',
-        url: '/api/qna/addAnswer',
+        url: '/v1/api/qna/addAnswer',
         data: queryString,
         dataType: 'json',
         error: onError,

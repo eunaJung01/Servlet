@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kuit.springbasic.core.mvc.model.ModelAndView;
-import kuit.springbasic.core.mvc.view.View;
+import kuit.springbasic.core.mvc.view.JsonView;
+import kuit.springbasic.core.mvc.view.JspView;
 import kuit.springbasic.core.mvc.util.UserSessionUtils;
+import kuit.springbasic.core.mvc.view.View;
 import kuit.springbasic.web.domain.User;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,8 +23,10 @@ import java.util.Map;
 @WebServlet(name = "dispatcher", urlPatterns = "/v1/*", loadOnStartup = 1)
 public class DispatcherServletV1 extends HttpServlet {
 
-    private RequestMappingV1 requestMapping;
     private static final String REDIRECT_PREFIX = "redirect:";
+    private static final String JSON_VIEW_PREFIX = "jsonView";
+
+    private RequestMappingV1 requestMapping;
 
     @Override
     public void init() {
@@ -41,9 +45,8 @@ public class DispatcherServletV1 extends HttpServlet {
         String viewName = modelAndView.getViewName();
         if (viewName == null) return;
 
-        boolean isRedirect = viewName.startsWith(REDIRECT_PREFIX);
-        View view = viewResolver(isRedirect, viewName);
-        view.render(isRedirect, modelAndView.getModel(), request, response);
+        View view = getView(viewName);
+        view.render(request, response, modelAndView.getModel());
     }
 
     private ControllerV1 getController(HttpServletRequest request, HttpServletResponse response) {
@@ -88,11 +91,19 @@ public class DispatcherServletV1 extends HttpServlet {
         return params;
     }
 
-    private View viewResolver(boolean isRedirect, String viewName) {
-        if (isRedirect) {
-            return new View(viewName.substring(REDIRECT_PREFIX.length()));
+    private View getView(String viewName) {
+        if (viewName.equals(JSON_VIEW_PREFIX)) {
+            return new JsonView();
         }
-        return new View("/WEB-INF/" + viewName + ".jsp");
+        boolean isRedirect = viewName.startsWith(REDIRECT_PREFIX);
+        return jspViewResolver(viewName, isRedirect);
+    }
+
+    private JspView jspViewResolver(String viewName, boolean isRedirect) {
+        if (isRedirect) {
+            return new JspView(viewName.substring(REDIRECT_PREFIX.length()), true);
+        }
+        return new JspView("/WEB-INF/" + viewName + ".jsp", false);
     }
 
 }

@@ -77,10 +77,10 @@
                                 <ul class="article-util-list">
                                     <li>
                                         <a class="link-modify-article"
-                                           href="/api/qna/updateAnswer?answerId=${each.answerId}">수정</a>
+                                           href="/v1/api/qna/updateAnswer?answerId=${each.answerId}">수정</a>
                                     </li>
                                     <li>
-                                        <form class="form-delete" action="/api/qna/deleteAnswer" method="POST">
+                                        <form class="form-delete" action="/v1/api/qna/deleteAnswer" method="POST">
                                             <input type="hidden" name="answerId" value="${each.answerId}"/>
                                             <button type="submit" class="link-delete-article">삭제</button>
                                         </form>
@@ -117,8 +117,7 @@
             <div class="article-header-thumb">
                 <img src="/img/picture.jpeg" class="article-author-thumb" alt="">
             </div>
-            <div class="article-header-text">
-                {0}
+            <div class="article-header-text">{0}
                 <div class="article-header-time">{1}</div>
             </div>
         </div>
@@ -130,10 +129,10 @@
         <div class="article-util">
             <ul class="article-util-list">
                 <li>
-                    <a class="link-modify-article" href="/api/qna/updateAnswer/{3}">수정</a>
+                    <a class="link-modify-article" href="/v1/api/qna/updateAnswer/{3}">수정</a>
                 </li>
                 <li>
-                    <form class="form-delete" action="/api/qna/deleteAnswer" method="POST">
+                    <form class="form-delete" action="/v1/api/qna/deleteAnswer" method="POST">
                         <input type="hidden" name="answerId" value="{4}"/>
                         <button type="submit" class="link-delete-article">삭제</button>
                     </form>
@@ -145,6 +144,6 @@
 
 <script src="/js/jquery-2.2.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../js/scripts.js"></script>
+<script src="../../js/scriptsV1.js"></script>
 </body>
 </html>
