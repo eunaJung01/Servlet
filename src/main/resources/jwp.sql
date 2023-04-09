@@ -13,6 +13,9 @@ CREATE TABLE USERS
 INSERT INTO USERS
 VALUES ('admin', 'password', '정우', 'admin@naver.com');
 
+INSERT INTO USERS
+VALUES ('euna', 'password', '아랄라', 'aralla@daum.net');
+
 DROP TABLE IF EXISTS QUESTIONS;
 
 CREATE TABLE QUESTIONS
