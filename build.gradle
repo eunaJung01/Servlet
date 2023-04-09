@@ -21,8 +21,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation("org.apache.commons:commons-dbcp2:2.6.0")
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
     // JSP 추가 시작
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
@@ -32,11 +31,11 @@ dependencies {
     // JSP 추가 끝
 
     runtimeOnly 'com.h2database:h2'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation("org.apache.commons:commons-dbcp2:2.6.0")
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
