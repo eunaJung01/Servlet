@@ -2,6 +2,7 @@ package kuit.servlet.web.controller.v2.login;
 
 import jakarta.servlet.http.HttpSession;
 import kuit.servlet.core.mvc.controller.v2.ControllerV2;
+import kuit.servlet.core.mvc.util.UserSessionUtils;
 import kuit.servlet.web.dao.UserDao;
 import kuit.servlet.web.domain.User;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class LogInControllerV2 implements ControllerV2 {
         User user = userDao.findByUserId(userId);
 
         if (user != null && user.equals(loggedInUser)) {
-            session.setAttribute("user", user);
+            session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user);
             return "redirect:/v2";
         }
         return "redirect:/v2/user/loginFailed";
