@@ -6,9 +6,9 @@
 <%@ include file="/include/v3/headerV3.jspf" %>
 <body>
 <%@ include file="/include/v3/navigationV1.jspf" %>
+
 <div class="container">
     <main class="form-signin">
-
         <div>
             ID와 비밀번호가 틀렸습니다.
         </div>
@@ -31,6 +31,7 @@
 
     </main>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/v3/scriptsV1.js"></script>
 </body>

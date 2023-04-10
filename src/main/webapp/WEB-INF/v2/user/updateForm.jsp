@@ -9,7 +9,6 @@
 
 <div class="container" id="main">
     <main class="form-signin">
-
         <form name="update" method="post" action="/v2/user/update">
             <div class="form-floating">
                 <input type="text" class="form-control" value="${user.userId}" id="userId" name="userId"
@@ -38,7 +37,6 @@
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">개인 정보 수정</button>
         </form>
-
     </main>
 </div>
 

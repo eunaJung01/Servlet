@@ -6,6 +6,7 @@
 <%@ include file="/include/v1/headerV1.jspf" %>
 <body>
 <%@ include file="/include/v1/navigationV1.jspf" %>
+
 <div class="container">
     <main class="form-signin">
         <form name="login" method="post" action="/v1/user/login">
@@ -24,6 +25,7 @@
         </form>
     </main>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../js/v1/scriptsV1.js"></script>
 </body>

@@ -8,9 +8,7 @@
 <%@ include file="/include/v3/navigationV2.jspf" %>
 
 <div class="container" id="main">
-
     <main class="form-signin">
-
         <form name="sign-up" method="post" action="/v3/v2/user/signup">
             <div class="form-floating">
                 <input type="text" class="form-control" id="userId" name="userId" placeholder="Id">
