@@ -15,7 +15,6 @@
             <th class="col-md-3">이름</th>
             <th class="col-md-3">이메일</th>
             <th class="col-md-3">#</th>
-
         </tr>
         </thead>
         <tbody>
