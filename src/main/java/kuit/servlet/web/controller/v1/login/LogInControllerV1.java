@@ -24,7 +24,7 @@ public class LogInControllerV1 implements ControllerV1 {
 
     @Override
     public ModelAndView execute(Map<String, String> params) throws SQLException {
-        log.info("LogInControllerV1_V3");
+        log.info("LogInControllerV1");
 
         String userId = params.get("userId");
         String password = params.get("password");
