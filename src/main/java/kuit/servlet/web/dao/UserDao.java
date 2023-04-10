@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserDao {
 
-    JdbcTemplate<User> jdbcTemplate = new JdbcTemplate<>();
+    private final JdbcTemplate<User> jdbcTemplate = new JdbcTemplate<>();
 
     public void insert(User user) {
         String sql = "insert into users values (?, ?, ?, ?)";
